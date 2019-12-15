@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CECAD6"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Choose">
+
+    <Button
+        android:id="@+id/login"
+        style="@android:style/Widget.Material.Light.Button.Inset"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="60dp"
+        android:text="LOGIN"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/register"
+        style="@android:style/Widget.Button.Inset"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:text="Register"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="20sp" />
+
+</LinearLayout>

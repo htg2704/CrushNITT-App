@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "892522746834",
+    "firebase_url": "https://crushnitt.firebaseio.com",
+    "project_id": "crushnitt",
+    "storage_bucket": "crushnitt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892522746834:android:881190e3a5dcf37bd22e0b",
+        "android_client_info": {
+          "package_name": "com.example.crushnitt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892522746834-a6un731mnn3649mjd7tqgbd35fliumbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.crushnitt",
+            "certificate_hash": "81e9af084d6d0607966f5137376a11f4dc069ce1"
+          }
+        },
+        {
+          "client_id": "892522746834-d5v0s2dfi5k0k56dj1fcv0vi55lvl1im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVdUAdYxSkKGkwsvxkC3ryr2NAoq6b9qI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892522746834-d5v0s2dfi5k0k56dj1fcv0vi55lvl1im.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
