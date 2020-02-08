@@ -16,7 +16,6 @@ import java.util.List;
 
 public class arrayAdapter extends ArrayAdapter<cards> {
 
-    Context context;
 
     public arrayAdapter(Context context, int resourceId, List<cards> items){
         super(context, resourceId, items);
@@ -37,7 +36,7 @@ public class arrayAdapter extends ArrayAdapter<cards> {
                 Glide.with(convertView.getContext()).load(R.mipmap.ic_launcher).into(image);
                 break;
             default:
-                //Glide.clear(image);
+                Glide.with(convertView.getContext()).clear(image);
                 Glide.with(convertView.getContext()).load(card_item.getProfileImageUrl()).into(image);
                 break;
         }

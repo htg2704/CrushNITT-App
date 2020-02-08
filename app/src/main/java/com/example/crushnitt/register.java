@@ -78,10 +78,10 @@ public class register extends AppCompatActivity {
                         } else {
                             String userid = firebaseAuth.getCurrentUser().getUid();
                             DatabaseReference current = FirebaseDatabase.getInstance().
-                                    getReference().child("Users").child(r.getText().toString()).child(userid).child("name");
+                                    getReference().child("Users").child(userid);
 
                             Map userInfo = new HashMap<>();
-                            userInfo.put("name", name);
+                            userInfo.put("name", n);
                             userInfo.put("sex", r.getText().toString());
                             userInfo.put("profileImageUrl", "default");
                             current.updateChildren(userInfo);
