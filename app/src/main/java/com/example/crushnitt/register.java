@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -28,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class register extends AppCompatActivity {
-    Button register;
+    Button register,log;
     EditText email,password, name;
     RadioGroup mrg;
     private FirebaseAuth firebaseAuth;
@@ -44,14 +45,15 @@ public class register extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null){
-                    Intent intent= new Intent(register.this, MainActivity.class);
+                   /* Intent intent= new Intent(register.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                    return;
+                    return;*/
                 }
             }
         };
         register = findViewById(R.id.submit);
+        log = findViewById(R.id.log);
         email = findViewById(R.id.email);
         password= findViewById(R.id.password);
         mrg = findViewById(R.id.radio);
@@ -75,22 +77,40 @@ public class register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
                             Toast.makeText(getApplicationContext(),"fail",Toast.LENGTH_SHORT).show();
+                            Log.w("create exception",task.getException());
                         } else {
-                            String userid = firebaseAuth.getCurrentUser().getUid();
-                            DatabaseReference current = FirebaseDatabase.getInstance().
-                                    getReference().child("Users").child(userid);
+                                    String userid = firebaseAuth.getCurrentUser().getUid();
+                                    DatabaseReference current = FirebaseDatabase.getInstance().
+                                            getReference().child("Users").child(userid);
 
-                            Map userInfo = new HashMap<>();
-                            userInfo.put("name", n);
-                            userInfo.put("sex", r.getText().toString());
-                            userInfo.put("profileImageUrl", "default");
-                            current.updateChildren(userInfo);
+                                    Map userInfo = new HashMap<>();
+                                    userInfo.put("name", n);
+                                    userInfo.put("sex", r.getText().toString());
+                                    userInfo.put("profileImageUrl", "default");
+                                    current.updateChildren(userInfo);
+                                    Intent intent= new Intent(register.this, login.class);
+                                    startActivity(intent);
+                                    finish();
+                                    }
+                                }
+                            });
                         }
                     }
-                });
+                );
+
+
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(register.this, login.class);
+                startActivity(intent);
+                finish();
+                return;
+
             }
         });
     }
+
 
     @Override
     protected void onStart() {
@@ -102,5 +122,11 @@ public class register extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), Choose.class);
+        startActivity(intent);
+        finish();
     }
 }

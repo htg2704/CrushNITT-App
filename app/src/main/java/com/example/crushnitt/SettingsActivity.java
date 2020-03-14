@@ -51,6 +51,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -143,16 +145,17 @@ public class SettingsActivity extends AppCompatActivity {
         mUserDatabase.updateChildren(userInfo);
         if(resultUri != null){
             StorageReference filepath = FirebaseStorage.getInstance().getReference().child("profileImages").child(userId);
-            AtomicReference<Bitmap> bitmap = null;
+            Bitmap bitmap = null;
 
             try {
-                bitmap.set(MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri));
+                bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), resultUri);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.get().compress(Bitmap.CompressFormat.JPEG, 20, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
             byte[] data = baos.toByteArray();
             UploadTask uploadTask = filepath.putBytes(data);
             uploadTask.addOnFailureListener(new OnFailureListener() {

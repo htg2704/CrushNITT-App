@@ -2,6 +2,7 @@ package com.example.crushnitt.Chat;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class ChatActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mChatAdapter;
+    RecyclerView.Adapter mChatAdapter;
     private RecyclerView.LayoutManager mChatLayoutManager;
 
     private EditText mSendEditText;
@@ -52,10 +53,12 @@ public class ChatActivity extends AppCompatActivity {
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID).child("connections").child("matches").child(matchId).child("ChatId");
         mDatabaseChat = FirebaseDatabase.getInstance().getReference().child("Chat");
-
+        //mDatabaseChat.keepSynced(true);
+        //mDatabaseUser.keepSynced(true);
+        Log.d("test","method 0 invoked");
         getChatId();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(false);
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
@@ -90,10 +93,13 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void getChatId(){
+        Log.d("test","method 1 invoked");
         mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                getChatMessages();
                 if (dataSnapshot.exists()){
+                    Log.d("test","method 2 invoked");
                     chatId = dataSnapshot.getValue().toString();
                     mDatabaseChat = mDatabaseChat.child(chatId);
                     getChatMessages();
@@ -114,6 +120,7 @@ public class ChatActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String message = null;
                     String createdByUser = null;
+                    Log.d("test","method invoked");
 
                     if(dataSnapshot.child("text").getValue()!=null){
                         message = dataSnapshot.child("text").getValue().toString();

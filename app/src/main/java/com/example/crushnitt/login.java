@@ -1,8 +1,10 @@
 package com.example.crushnitt;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,10 +32,17 @@ public class login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
-                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    if (user != null) {
+                        //if(firebaseAuth.getCurrentUser().isEmailVerified())
+                        //{
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                       /* }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Verify your email",Toast.LENGTH_SHORT).show();
+                        }*/
                 }
             }
         };
@@ -68,5 +77,11 @@ public class login extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), Choose.class);
+        startActivity(intent);
+        finish();
     }
 }

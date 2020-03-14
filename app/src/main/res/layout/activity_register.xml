@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="Password"
+        android:inputType="textPassword"
         android:id="@+id/password">
     </EditText>
     <Button
@@ -44,6 +45,11 @@
         android:layout_height="50dp"
         android:text="Submit"
         android:id="@+id/submit"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Login"
+        android:id="@+id/log"/>
 
 
 </LinearLayout>
